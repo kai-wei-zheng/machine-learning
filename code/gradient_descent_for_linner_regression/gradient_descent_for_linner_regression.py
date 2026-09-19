@@ -15,7 +15,7 @@ class MSELoss:
 
 
 class GradientDescent:
-    def __init__(self, lr=0.02):
+    def __init__(self, lr=0.01):
         self.lr = lr
 
     def step(self, w, b, dw, db):
