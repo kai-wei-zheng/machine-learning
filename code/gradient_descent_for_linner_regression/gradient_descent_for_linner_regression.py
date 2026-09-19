@@ -76,7 +76,7 @@ if __name__ == "__main__":
     y = df["ViolentCrimesPerPop"].to_numpy()
     df = df.drop(columns=["ViolentCrimesPerPop"])
 
-
+    # delete missing parts
     df = df.dropna(axis=1)
     feature_names = df.columns.tolist()
     X = df.to_numpy()
