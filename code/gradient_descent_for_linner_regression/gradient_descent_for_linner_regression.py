@@ -33,25 +33,20 @@ class LinearRegression:
         self.loss_function = MSELoss()
         self.opt = GradientDescent(lr=self.lr)
 
-    def optimal(self, X, y):
-        n, d = X.shape  # n, d: number of samples and features
+    def optimize(self, X, y):
+        n, d = X.shape
         print(f"sample: n={n}, attribute: d={d}")
-
-        # Feature Standardization
+        # standardize features 
         X = (X - X.mean(axis=0)) / X.std(axis=0)
-
         self.w = np.zeros(d)
         self.b = 0.0
-
         for i in range(self.epochs):
             y_pred = X @ self.w + self.b
             loss = self.loss_function.compute_loss(y_pred, y)
             dw, db = self.loss_function.compute_grad(X, y_pred, y)
             self.w, self.b = self.opt.step(self.w, self.b, dw, db)
-
             if i % 50 == 0:
                 print(f"iteration{i:3d} | loss={loss:.4f}")
-
         final_loss = self.loss_function.compute_loss(X @ self.w + self.b, y)
         print(f"finish: loss={final_loss:.4f}, b={self.b:.4f}")
 
@@ -59,7 +54,7 @@ class LinearRegression:
         return X @ self.w + self.b
 
 if __name__ == "__main__":
-    # Parse 128 column names
+    # parse 128 column names
     names = []
     with open("communities.names", encoding="utf-8", errors="ignore") as f:
         for line in f:
@@ -68,18 +63,13 @@ if __name__ == "__main__":
                 names.append(m.group(1))
 
     df = pd.read_csv("communities.data", names=names, na_values="?")
-
-    # Remove 5 metadata columns
+    # remove 5 metadata columns
     df = df.drop(columns=["state", "county", "community", "communityname", "fold"])
-
-    # target column
     y = df["ViolentCrimesPerPop"].to_numpy()
     df = df.drop(columns=["ViolentCrimesPerPop"])
-
     # delete missing parts
     df = df.dropna(axis=1)
     feature_names = df.columns.tolist()
     X = df.to_numpy()
-
     model = LinearRegression(lr=0.01, epochs=5000)
-    model.optimal(X, y)
+    model.optimize(X, y)
