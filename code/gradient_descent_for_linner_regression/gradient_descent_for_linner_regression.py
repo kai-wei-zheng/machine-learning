@@ -8,9 +8,9 @@ class MSELoss:
         return np.mean(np.square(y_pred - y_true))
 
     def compute_grad(self, X, y_pred, y_true):
-        n = X.shape[0]
-        dw = 2.0 * X.T @ (y_pred - y_true) / n
-        db = 2.0 * np.sum(y_pred - y_true) / n
+        n = X.shape[0]  # number of samples
+        dw = 2.0 * X.T @ (y_pred - y_true) / n  # gradients of weights
+        db = 2.0 * np.sum(y_pred - y_true) / n  # gradients of bias
         return dw, db
 
 
