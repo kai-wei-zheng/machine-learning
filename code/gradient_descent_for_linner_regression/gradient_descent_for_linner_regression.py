@@ -62,7 +62,6 @@ def _get_data():
             m = re.match(r"@attribute\s+(\S+)", line)
             if m:
                 names.append(m.group(1))
-
     df = pd.read_csv("communities.data", names=names, na_values="?")
     # remove 5 metadata columns
     df = df.drop(columns=["state", "county", "community", "communityname", "fold"])
