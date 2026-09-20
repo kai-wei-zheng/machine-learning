@@ -26,15 +26,15 @@ class GradientDescent:
 
 class OptLinearRegression:
     def __init__(self, lr=0.01, epochs=5000):
-        self.lr = lr
+        self.lr = lr  # learning rate
         self.epochs = epochs
-        self.w = None
-        self.b = None
+        self.w = None  # weights
+        self.b = None  # bias
         self.loss_function = MSELoss()
         self.opt = GradientDescent(lr=self.lr)
 
     def optimal(self, X, y):
-        n, d = X.shape
+        n, d = X.shape  # n, d: number of samples and features
         print(f"sample: n={n}, attribute: d={d}")
 
         # Feature Standardization
