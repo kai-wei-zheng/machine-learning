@@ -24,7 +24,7 @@ class GradientDescent:
         return w, b
 
 
-class OptLinearRegression:
+class LinearRegression:
     def __init__(self, lr=0.01, epochs=5000):
         self.lr = lr  # learning rate
         self.epochs = epochs
@@ -81,5 +81,5 @@ if __name__ == "__main__":
     feature_names = df.columns.tolist()
     X = df.to_numpy()
 
-    model = OptLinearRegression(lr=0.01, epochs=5000)
+    model = LinearRegression(lr=0.01, epochs=5000)
     model.optimal(X, y)
