@@ -53,7 +53,8 @@ class LinearRegression:
     def predict(self, X):
         return X @ self.w + self.b
 
-if __name__ == "__main__":
+
+def _get_data():
     # parse 128 column names
     names = []
     with open("communities.names", encoding="utf-8", errors="ignore") as f:
@@ -71,5 +72,10 @@ if __name__ == "__main__":
     df = df.dropna(axis=1)
     feature_names = df.columns.tolist()
     X = df.to_numpy()
+    return X, y
+    
+
+if __name__ == "__main__":
+    X, y = _get_data()
     model = LinearRegression(lr=0.01, epochs=5000)
     model.optimize(X, y)
