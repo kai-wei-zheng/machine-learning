@@ -16,11 +16,11 @@ class MSELoss:
 
 class GradientDescent:
     def __init__(self, lr=0.01):
-        self.lr = lr
+        self.lr = lr  # learning rate
 
     def step(self, w, b, dw, db):
-        w -= self.lr * dw
-        b -= self.lr * db
+        w -= self.lr * dw  # weights
+        b -= self.lr * db  # bias
         return w, b
 
 
